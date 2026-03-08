@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Wars Happen: The Real Reason</title>
+<meta name="description" content="A clear explanation of why wars happen, who profits, and what it means for India and the world.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
+
+:root {
+  --ink: #111111;
+  --ink-soft: #2e2e2e;
+  --ink-muted: #666666;
+  --ink-faint: #999999;
+  --paper: #f7f4ef;
+  --paper-warm: #f0ebe2;
+  --paper-dark: #e8e1d4;
+  --accent: #c0392b;
+  --accent-soft: rgba(192,57,43,0.07);
+  --gold: #9a7d3a;
+  --blue: #1a4a7a;
+  --blue-soft: rgba(26,74,122,0.07);
+  --dark-bg: #131313;
+  --dark-text: rgba(255,255,255,0.82);
+  --dark-muted: rgba(255,255,255,0.45);
+  --dark-faint: rgba(255,255,255,0.22);
+  --dark-border: rgba(255,255,255,0.08);
+  --border: rgba(0,0,0,0.08);
+  --max: 660px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'DM Sans', sans-serif;
+  font-size:18px;
+  line-height:1.82;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  hyphens:none;
+  -webkit-hyphens:none;
+}
+
+/* PROGRESS */
+#progress { position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0%;z-index:1000;transition:width 0.1s linear; }
+
+/* NAV */
+nav { position:fixed;top:0;left:0;right:0;padding:15px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;transition:background 0.3s,box-shadow 0.3s; }
+nav.scrolled { background:rgba(247,244,239,0.96);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--border); }
+.nav-brand { font-family:'DM Serif Display',serif;font-size:15px;color:var(--ink);opacity:0;transition:opacity 0.3s; }
+nav.scrolled .nav-brand { opacity:1; }
+.nav-right { display:flex;gap:8px;align-items:center; }
+.nav-btn { font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-muted);cursor:pointer;border:1px solid var(--border);padding:7px 13px;background:none;font-family:'DM Sans',sans-serif;transition:all 0.2s;text-decoration:none;display:inline-block;white-space:nowrap; }
+.nav-btn:hover { background:var(--ink);color:var(--paper);border-color:var(--ink); }
+.nav-btn.accent { background:var(--accent);color:#fff;border-color:var(--accent); }
+.nav-btn.accent:hover { opacity:0.85; }
+
+/* CHAPTER DOTS */
+.chapter-dots { position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:100; }
+.c-dot { width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,0.14);cursor:pointer;transition:all 0.3s; }
+.c-dot.active { background:var(--accent);transform:scale(1.5); }
+.c-dot:hover { background:var(--accent);opacity:0.6; }
+
+/* SECTIONS */
+section { min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:90px 24px 80px;position:relative; }
+.container { max-width:var(--max);margin:0 auto;width:100%; }
+
+/* HERO */
+#hero { background:var(--dark-bg);align-items:center;text-align:center; }
+#hero::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 25%,rgba(192,57,43,0.18) 0%,transparent 55%),radial-gradient(ellipse at 75% 75%,rgba(26,74,122,0.14) 0%,transparent 55%);pointer-events:none; }
+.hero-eyebrow { font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:28px;opacity:0;animation:fadeUp 0.8s ease 0.3s forwards; }
+.hero-number { font-family:'DM Serif Display',serif;font-size:clamp(68px,15vw,155px);line-height:0.88;color:#fff;letter-spacing:-3px;opacity:0;animation:fadeUp 1s ease 0.5s forwards;position:relative;z-index:1; }
+.hero-number span { color:var(--accent); }
+.hero-unit { font-size:clamp(14px,2.5vw,18px);color:rgba(255,255,255,0.38);margin-top:14px;font-weight:300;opacity:0;animation:fadeUp 0.8s ease 0.9s forwards;letter-spacing:0.5px; }
+.hero-question { font-family:'DM Serif Display',serif;font-size:clamp(19px,3.2vw,28px);color:rgba(255,255,255,0.88);margin-top:40px;line-height:1.4;opacity:0;animation:fadeUp 0.8s ease 1.2s forwards;max-width:540px;margin-left:auto;margin-right:auto; }
+.hero-scroll { position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.25);font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0;animation:fadeUp 0.8s ease 2s forwards; }
+.scroll-line { width:1px;height:34px;background:rgba(255,255,255,0.18);animation:scrollPulse 2s ease infinite; }
+@keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:0.3}50%{transform:scaleY(0.4);opacity:0.1} }
+
+/* DARK SECTION */
+.bg-dark { background:var(--dark-bg); }
+.bg-dark .chapter-label { color:var(--dark-faint); }
+.bg-dark .display { color:#fff; }
+.bg-dark p { color:var(--dark-text); }
+.bg-dark p strong { color:#fff; }
+.bg-dark .divider { background:var(--dark-border); }
+.bg-dark .pull-quote { border-left-color:rgba(192,57,43,0.5); }
+.bg-dark .pull-quote-text { color:rgba(255,255,255,0.88); }
+.bg-dark .pull-quote-attr { color:var(--dark-muted); }
+.bg-dark .s-tl-year { color:var(--dark-muted) !important; }
+.bg-dark .s-tl-event { color:rgba(255,255,255,0.9) !important; }
+.bg-dark .s-tl-what { color:rgba(255,255,255,0.58) !important; }
+.bg-dark .s-timeline::before { background:var(--dark-border); }
+.bg-dark .s-tl-item::before { background:var(--dark-bg);border-color:rgba(255,255,255,0.25); }
+.bg-dark .s-tl-item.hot::before { background:var(--accent);border-color:var(--accent); }
+.bg-dark .callout-block { background:rgba(192,57,43,0.1);border-left-color:rgba(192,57,43,0.55); }
+.bg-dark .callout-block p { color:rgba(255,255,255,0.85); }
+.bg-dark .callout-block p strong { color:#fff; }
+
+/* WARM */
+.bg-warm { background:var(--paper-warm); }
+
+/* CHAPTER LABEL */
+.chapter-label { font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px;display:flex;align-items:center;gap:12px; }
+.chapter-label::before { content:'';width:28px;height:1px;background:currentColor;flex-shrink:0; }
+
+/* HEADING */
+.display { font-family:'DM Serif Display',serif;font-size:clamp(28px,5.5vw,50px);line-height:1.12;color:var(--ink);letter-spacing:-0.5px;margin-bottom:28px; }
+.display em { font-style:italic;color:var(--accent); }
+
+/* BODY */
+p { font-size:18px;color:var(--ink-soft);line-height:1.82;margin-bottom:20px;font-weight:300; }
+p strong { color:var(--ink);font-weight:500; }
+p:last-child { margin-bottom:0; }
+
+/* SIMPLE CALLOUT — big single idea */
+.big-idea { margin:32px 0;padding:28px 24px;border-left:3px solid var(--accent);background:var(--accent-soft); }
+.big-idea-label { font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px; }
+.big-idea-text { font-family:'DM Serif Display',serif;font-size:clamp(18px,3vw,24px);color:var(--ink);line-height:1.45; }
+.bg-dark .big-idea { background:rgba(192,57,43,0.12);border-left-color:rgba(192,57,43,0.6); }
+.bg-dark .big-idea-text { color:rgba(255,255,255,0.9); }
+
+/* COMPARE */
+.compare { display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:36px 0;background:var(--border);border:1px solid var(--border); }
+.compare-side { padding:28px 22px;background:var(--paper); }
+.compare-side.dark { background:var(--dark-bg); }
+.compare-label { font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px; }
+.compare-side.dark .compare-label { color:var(--dark-muted); }
+.compare-num { font-family:'DM Serif Display',serif;font-size:clamp(36px,7vw,62px);line-height:1;letter-spacing:-1px;margin-bottom:10px; }
+.compare-desc { font-size:14px;color:var(--ink-muted);line-height:1.55;font-weight:300; }
+.compare-side.dark .compare-desc { color:var(--dark-muted); }
+
+/* PULL QUOTE */
+.pull-quote { border-left:3px solid var(--accent);padding:6px 0 6px 22px;margin:36px 0; }
+.pull-quote-text { font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(17px,2.8vw,21px);color:var(--ink);line-height:1.6;margin-bottom:12px; }
+.pull-quote-attr { font-size:12px;letter-spacing:0.8px;text-transform:uppercase;color:var(--ink-muted);line-height:1.5; }
+
+/* FACT BOX */
+.fact-box { background:var(--paper-warm);border:1px solid var(--paper-dark);border-left:3px solid var(--gold);padding:22px 22px;margin:28px 0; }
+.fact-box-label { font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px; }
+.fact-box-body { font-size:16px;color:var(--ink-soft);line-height:1.72; }
+.fact-box-body strong { color:var(--ink);font-weight:500; }
+
+/* CALLOUT */
+.callout-block { border-left:3px solid var(--accent);background:var(--accent-soft);padding:22px 22px;margin:28px 0; }
+.callout-block p { color:var(--ink);margin:0;font-size:17px; }
+.callout-block.blue { border-left-color:var(--blue);background:var(--blue-soft); }
+
+/* KRISHNAMURTI BOX */
+.k-box { margin:40px 0;padding:32px 28px;background:var(--dark-bg);position:relative; }
+.k-box::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold)); }
+.k-label { font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark-faint);margin-bottom:20px; }
+.k-question { font-family:'DM Serif Display',serif;font-size:clamp(17px,2.8vw,22px);color:rgba(255,255,255,0.88);line-height:1.55;margin-bottom:16px;padding-left:16px;border-left:2px solid var(--accent); }
+.k-attr { font-size:12px;color:var(--dark-muted);letter-spacing:0.5px; }
+
+/* TIMELINE */
+.s-timeline { margin:36px 0;position:relative;padding-left:20px; }
+.s-timeline::before { content:'';position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--border); }
+.s-tl-item { margin-bottom:32px;position:relative; }
+.s-tl-item::before { content:'';position:absolute;left:-24px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-faint); }
+.s-tl-item.hot::before { border-color:var(--accent);background:var(--accent); }
+.s-tl-year { font-size:12px;letter-spacing:1.5px;color:var(--ink-muted);margin-bottom:4px; }
+.s-tl-event { font-size:16px;color:var(--ink);font-weight:500;margin-bottom:5px;line-height:1.4; }
+.s-tl-what { font-size:14px;color:var(--ink-muted);line-height:1.65; }
+
+/* NUMBERED LIST */
+.n-list { margin:28px 0; }
+.n-item { display:grid;grid-template-columns:34px 1fr;gap:14px;margin-bottom:28px; }
+.n-num { font-family:'DM Serif Display',serif;font-size:28px;color:var(--accent);line-height:1;padding-top:2px; }
+.n-title { font-size:17px;font-weight:500;color:var(--ink);margin-bottom:5px; }
+.n-body { font-size:15px;color:var(--ink-muted);line-height:1.65; }
+
+/* BARS */
+.s-bar-wrap { margin:32px 0; }
+.s-bar-title { font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:22px; }
+.s-bar-row { margin-bottom:22px; }
+.s-bar-top { display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px; }
+.s-bar-lbl { font-size:15px;color:var(--ink-soft);font-weight:400;padding-right:10px; }
+.s-bar-val { font-family:'DM Serif Display',serif;font-size:19px;color:var(--ink);flex-shrink:0; }
+.s-bar-track { height:5px;background:var(--paper-dark);border-radius:3px; }
+.s-bar-fill { height:100%;border-radius:3px;transition:width 1.4s cubic-bezier(0.16,1,0.3,1); }
+.s-bar-note { font-size:13px;color:var(--ink-faint);margin-top:5px;line-height:1.5; }
+
+/* CARD GRID */
+.card-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0; }
+.card-item { background:var(--paper-warm);border:1px solid var(--paper-dark);padding:20px; }
+.card-item-icon { font-size:24px;margin-bottom:10px; }
+.card-item-title { font-size:15px;font-weight:500;color:var(--ink);margin-bottom:7px; }
+.card-item-body { font-size:14px;color:var(--ink-muted);line-height:1.6; }
+
+/* DIVIDER */
+.divider { width:40px;height:2px;background:var(--accent);margin:40px 0; }
+
+/* FOOTNOTE */
+.footnote { font-size:13px;color:var(--ink-faint);border-top:1px solid var(--border);padding-top:22px;margin-top:44px;line-height:1.65; }
+
+/* REACTIONS SECTION */
+.reactions-section { background:var(--paper-warm);padding:70px 24px;min-height:auto; }
+.reactions-inner { max-width:var(--max);margin:0 auto; }
+.reactions-title { font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,34px);color:var(--ink);margin-bottom:10px;line-height:1.25; }
+.reactions-sub { font-size:16px;color:var(--ink-muted);margin-bottom:30px;font-weight:300; }
+.react-btns { display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px; }
+.react-btn { display:flex;align-items:center;gap:8px;padding:11px 18px;border:1px solid var(--paper-dark);background:var(--paper);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink-soft);border-radius:2px; }
+.react-btn:hover { border-color:var(--ink-muted);background:var(--paper-dark); }
+.react-btn.selected { border-color:var(--accent);background:var(--accent-soft);color:var(--ink); }
+.react-btn .emoji { font-size:20px; }
+.react-btn .count { font-size:13px;color:var(--ink-faint);margin-left:2px; }
+.react-thanks { display:none;font-size:15px;color:var(--ink-muted);font-style:italic;margin-top:10px;margin-bottom:4px; }
+.comment-area { margin-top:28px; }
+.comment-label { font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px; }
+.comment-input { width:100%;padding:13px 15px;border:1px solid var(--paper-dark);background:var(--paper);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);resize:none;line-height:1.6;transition:border-color 0.2s;border-radius:2px; }
+.comment-input:focus { outline:none;border-color:var(--ink-muted); }
+.comment-input::placeholder { color:var(--ink-faint); }
+.comment-submit { margin-top:10px;padding:12px 26px;background:var(--ink);color:var(--paper);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;border-radius:2px; }
+.comment-submit:hover { opacity:0.8; }
+.thanks-msg { display:none;margin-top:10px;font-size:14px;color:var(--ink-muted);font-style:italic; }
+
+/* DASHBOARD BLOCK */
+.dashboard-link-block { margin-top:40px;padding:24px;border:1px solid var(--paper-dark);background:var(--paper);display:flex;align-items:flex-start;gap:18px; }
+.dlink-icon { font-size:28px;flex-shrink:0;margin-top:2px; }
+.dlink-title { font-size:16px;font-weight:500;color:var(--ink);margin-bottom:6px; }
+.dlink-body { font-size:14px;color:var(--ink-muted);line-height:1.65;margin-bottom:14px; }
+.dlink-cta { display:inline-block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--accent);cursor:pointer;text-decoration:none;transition:opacity 0.2s; }
+.dlink-cta:hover { opacity:0.7; }
+
+/* CTA */
+.cta-section { background:var(--dark-bg);min-height:auto;padding:90px 24px; }
+.cta-section .container { text-align:center; }
+.cta-title { font-family:'DM Serif Display',serif;font-size:clamp(24px,4.5vw,42px);color:#fff;line-height:1.25;margin-bottom:18px; }
+.cta-body { font-size:17px;color:var(--dark-muted);margin-bottom:36px;font-weight:300;max-width:460px;margin-left:auto;margin-right:auto; }
+.cta-actions { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+.btn-primary { background:var(--accent);color:#fff;border:none;padding:14px 30px;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s; }
+.btn-primary:hover { opacity:0.85; }
+.btn-ghost { background:none;color:var(--dark-muted);border:1px solid rgba(255,255,255,0.15);padding:14px 30px;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s; }
+.btn-ghost:hover { border-color:rgba(255,255,255,0.4);color:#fff; }
+.cta-footer { margin-top:52px;padding-top:28px;border-top:1px solid var(--dark-border);font-size:13px;color:var(--dark-faint);letter-spacing:0.3px; }
+
+/* REVEAL */
+.reveal { opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.32s; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+
+/* MOBILE */
+@media(max-width:640px) {
+  body { font-size:17px; }
+  section { padding:80px 18px 70px; }
+  .compare { grid-template-columns:1fr; }
+  .card-grid { grid-template-columns:1fr; }
+  .chapter-dots { display:none; }
+  nav { padding:12px 16px; }
+  .hero-scroll { display:none; }
+  .n-item { grid-template-columns:28px 1fr;gap:12px; }
+  .n-num { font-size:24px; }
+  .react-btns { gap:8px; }
+  .react-btn { padding:9px 13px;font-size:14px; }
+  .dashboard-link-block { flex-direction:column;gap:10px; }
+  .cta-section { padding:70px 18px; }
+  .reactions-section { padding:60px 18px; }
+  .pull-quote { padding-left:16px; }
+  p { font-size:17px; }
+  .k-box { padding:24px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="navbar">
+  <div class="nav-brand">Why Wars Happen</div>
+  <div class="nav-right">
+    <a href="power-comprehensive.html" class="nav-btn">Full Dashboard</a>
+    <button class="nav-btn accent" onclick="shareThis()">Share</button>
+  </div>
+</nav>
+
+<div class="chapter-dots">
+  <div class="c-dot active" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Start"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter1')" title="The Number"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter2')" title="The System"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter3')" title="The Proof"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter4')" title="Iran Now"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter5')" title="India"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter6')" title="Their Own Words"></div>
+  <div class="c-dot" onclick="scrollToSection('chapter7')" title="What Now"></div>
+</div>
+
+<!-- HERO -->
+<section id="hero" data-section="0">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="hero-eyebrow">A guided reading &mdash; March 2026</div>
+    <div class="hero-number">~$<span>195</span><br>Trillion</div>
+    <div class="hero-unit">The gap between what finance claims to own and what the world actually produces</div>
+    <div class="hero-question">People are dying in Iran right now. Prices in your city will rise because of it. Nobody on television is telling you why. This piece will.</div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to begin
+  </div>
+</section>
+
+<!-- CHAPTER 1 -->
+<section id="chapter1" data-section="1">
+  <div class="container">
+    <div class="chapter-label reveal">Chapter One</div>
+    <div class="display reveal reveal-delay-1">Why your petrol price is <em>set in Washington</em></div>
+
+    <p class="reveal reveal-delay-2">Before we get to Iran, before we get to Gaza, before we get to any of the wars you are watching, you need to understand one thing. It is not complicated. But once you see it, you cannot unsee it.</p>
+
+    <p class="reveal">Imagine a moneylender in your neighbourhood. He has lent out ten times more money than he actually has. Those loans earn him interest. That interest keeps the whole thing alive. The moment people stop taking new loans, or stop paying back old ones, the entire structure collapses. So the moneylender does not stop. He cannot stop. He finds new borrowers. He pressures existing ones. He does whatever it takes to keep the money moving.</p>
+
+    <p class="reveal">Now make that moneylender the entire Western financial system. And make those borrowers entire countries.</p>
+
+    <div class="compare reveal">
+      <div class="compare-side">
+        <div class="compare-label">What global finance claims to own</div>
+        <div class="compare-num" style="color:var(--accent)">$300T</div>
+        <div class="compare-desc">Every stock, bond, loan, derivative, and paper claim in existence. What the financial world says it is owed.</div>
+      </div>
+      <div class="compare-side dark">
+        <div class="compare-label">What the world actually produces in a year</div>
+        <div class="compare-num" style="color:#fff">$110T</div>
+        <div class="compare-desc">Every meal, car, service, and piece of software actually made. The real economy.</div>
+      </div>
+    </div>
+
+    <p class="reveal">The gap is <strong>$195 trillion.</strong> Three times more money has been promised than exists. To stay alive, that system must constantly find new places to invest, new markets to enter, new assets to absorb. It is not greed. It is physics. A shark that stops moving dies.</p>
+
+    <div class="big-idea reveal">
+      <div class="big-idea-label">This one sentence explains seventy years of foreign policy</div>
+      <div class="big-idea-text">When a country opens its resources to global capital, we call it development. When it refuses, we call it a threat to stability. And then we destabilize it.</div>
+    </div>
+
+    <p class="reveal">Wars, sanctions, regime changes. Not mistakes. Not failures. Not the work of evil individuals. They are the maintenance operations of a system that cannot survive without constant expansion. Understanding this does not make you a conspiracy theorist. It makes you literate.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section id="chapter2" class="bg-warm" data-section="2">
+  <div class="container">
+    <div class="chapter-label reveal">Chapter Two</div>
+    <div class="display reveal reveal-delay-1">The four steps they <em>always follow</em></div>
+
+    <p class="reveal reveal-delay-2">Say you are a small country. You have oil. Or lithium. Or a hundred million young people who represent a massive consumer market. You elect a leader who says: we will manage our own resources. We will industrialize ourselves. We will not hand our national assets to foreign companies.</p>
+
+    <p class="reveal">Here is exactly what happens next.</p>
+
+    <div class="n-list reveal">
+      <div class="n-item">
+        <div class="n-num">1</div>
+        <div>
+          <div class="n-title">Sanctions: turn the economy into a slow suffocation</div>
+          <div class="n-body">Your country is cut off from the international banking system. You cannot receive payment for your exports. You cannot pay for imports. Medicine becomes scarce. Fuel becomes expensive. Inflation destroys savings overnight. Your middle class is wiped out first. People stop blaming the foreign power that imposed the sanctions and start blaming their own government. Eventually something gives. Right now this is happening simultaneously to Iran, Venezuela, Cuba, North Korea, Russia, and Myanmar.</div>
+        </div>
+      </div>
+      <div class="n-item">
+        <div class="n-num">2</div>
+        <div>
+          <div class="n-title">Debt: offer a lifeline with conditions attached</div>
+          <div class="n-body">A financial crisis arrives. It may have been engineered; it may be natural. Either way, the IMF appears with a loan. The loan has conditions: privatize your state companies, end fuel and food subsidies, remove protections for local industry, open your financial system to foreign capital. You have no choice but to accept. Local businesses collapse under the competition. Poverty rises. You need another loan to service the first one. Pakistan has signed IMF agreements 24 times. Each time the conditions tighten.</div>
+        </div>
+      </div>
+      <div class="n-item">
+        <div class="n-num">3</div>
+        <div>
+          <div class="n-title">Regime change: remove the government without invading</div>
+          <div class="n-body">Fund opposition groups. Place stories in foreign-language media. Identify generals or bureaucrats who can be turned. Organize protests at the right moment. If the leader is too popular, manufacture a scandal. The US government has officially acknowledged doing this in Iran in 1953, Guatemala in 1954, and Chile in 1973. Not rumours. Confirmed. In official archives. Declassified. These are three countries in which an elected government was removed and replaced with one that cooperated.</div>
+        </div>
+      </div>
+      <div class="n-item">
+        <div class="n-num">4</div>
+        <div>
+          <div class="n-title">War: destroy the country and then profit from rebuilding it</div>
+          <div class="n-body">The last resort. Also, for specific industries, the most profitable option. The country is bombed. Infrastructure is destroyed. Then the reconstruction contracts are awarded to companies from the countries that did the bombing. After Iraq, Halliburton alone received $39.5 billion in contracts. After Libya, oil fields were operational within months of Gaddafi's death. The rubble is not a tragedy to be managed. It is a market to be entered.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">"I spent 33 years in the Marines. I was a gangster for capitalism. I helped make Mexico safe for American oil interests. I helped make Haiti and Cuba a decent place for the National City Bank boys."</div>
+      <div class="pull-quote-attr">General Smedley Butler, the most decorated US Marine in history, in his 1935 book <em>War is a Racket</em>. He ran this playbook personally for three decades, then spent the rest of his life describing it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 3 -->
+<section id="chapter3" class="bg-dark" data-section="3">
+  <div class="container">
+    <div class="chapter-label reveal" style="color:var(--dark-faint)">Chapter Three</div>
+    <div class="display reveal reveal-delay-1">Five countries. <em>One pattern.</em></div>
+
+    <p class="reveal reveal-delay-2" style="color:var(--dark-text)">If you are skeptical, good. Skepticism is the right response. So do not take any of this on faith. Instead, look at what each country on this list did just before it was targeted. Look at what happened to its resources afterward. Then decide for yourself.</p>
+
+    <div class="s-timeline reveal">
+      <div class="s-tl-item">
+        <div class="s-tl-year">1951 — Iran</div>
+        <div class="s-tl-event">Prime Minister Mosaddegh nationalized Iranian oil</div>
+        <div class="s-tl-what">He was democratically elected. He said the oil under Iranian soil should belong to Iranians, not the Anglo-Persian Oil Company. Britain and the US called him a communist threat. In 1953, a joint CIA and MI6 operation removed him from power. He spent the rest of his life under house arrest. Iranian oil was handed back to British and American companies. The CIA officially confirmed the coup in 2013.</div>
+      </div>
+      <div class="s-tl-item">
+        <div class="s-tl-year">2000 — Iraq</div>
+        <div class="s-tl-event">Saddam Hussein switched Iraqi oil sales from dollars to euros</div>
+        <div class="s-tl-what">In November 2000, Iraq began accepting euros for oil. In March 2003, the US invaded. No weapons of mass destruction were found. Not one. The documented civilian death toll: 150,000. Conservative estimates of total deaths, including those from destroyed hospitals and water systems: over 500,000. Oil sales returned to dollars. Halliburton received $39.5 billion in contracts. A leaked British government memo confirmed the invasion decision was made in advance and the intelligence shaped around it.</div>
+      </div>
+      <div class="s-tl-item">
+        <div class="s-tl-year">2009 — Libya</div>
+        <div class="s-tl-event">Gaddafi proposed a gold-backed African currency for oil trade</div>
+        <div class="s-tl-what">A single pan-African currency backed by gold would have allowed African nations to trade oil without using dollars. Hillary Clinton's emails, released through FOIA, show this currency plan was a primary concern. In 2011, NATO launched airstrikes under a humanitarian justification. Gaddafi was killed. Libyan oil fields were operational within months. By 2017, CNN was filming open slave auctions in the country NATO had liberated.</div>
+      </div>
+      <div class="s-tl-item">
+        <div class="s-tl-year">2022 — Russia</div>
+        <div class="s-tl-event">Russia demanded payment for gas in rubles and yuan, bypassing the dollar</div>
+        <div class="s-tl-what">Within weeks, Russia was cut from SWIFT, the backbone of global banking. $300 billion in Russian sovereign reserves held in Western banks were frozen. This was unprecedented: the seizure of a nation's savings held abroad. The stated justification was Ukraine. The financial action specifically targeted the currency switch that predated the invasion.</div>
+      </div>
+      <div class="s-tl-item hot">
+        <div class="s-tl-year">2026 — Iran, as you read this</div>
+        <div class="s-tl-event">Iran had been pricing oil in non-dollar currencies since 2023</div>
+        <div class="s-tl-what">On February 28, 2026, US and Israeli forces launched coordinated strikes. Iran's Supreme Leader was killed in the opening hours. More than 1,230 Iranians have died as of this writing. The nuclear justification was prepared and ready. The financial motive had been building for seventy years.</div>
+      </div>
+    </div>
+
+    <div class="callout-block reveal">
+      <p>Five countries. Five different official reasons given to the public. Five different villains of the week. <strong>One thing each country did just before it was targeted: it moved its oil transactions away from the dollar.</strong> If this happened twice, it would be coincidence. It has now happened five times in seventy years with no exceptions. At some point coincidence stops being an explanation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 4 -->
+<section id="chapter4" data-section="4">
+  <div class="container">
+    <div class="chapter-label reveal">Chapter Four</div>
+    <div class="display reveal reveal-delay-1">Iran is not the prize. <em>Iran is the door.</em></div>
+
+    <p class="reveal reveal-delay-2">People are dying right now. Specific human beings in specific cities. And the official reason being given on every major news channel is about nuclear weapons and regional security. Here is the geography that nobody on television is showing you.</p>
+
+    <div class="compare reveal">
+      <div class="compare-side">
+        <div class="compare-label">The official justification</div>
+        <div style="font-size:16px;color:var(--ink-soft);line-height:1.7;font-weight:300">Iran was weeks away from a nuclear bomb. Israel had no choice. The US is maintaining regional stability and protecting its allies.</div>
+      </div>
+      <div class="compare-side" style="background:var(--paper-warm)">
+        <div class="compare-label">What the geography actually shows</div>
+        <div style="font-size:16px;color:var(--ink-soft);line-height:1.7;font-weight:300">Iran is the only land corridor to Central Asia that operates outside the dollar system. Remove Iran as an independent actor and an entire region worth over $5 trillion becomes accessible.</div>
+      </div>
+    </div>
+
+    <p class="reveal">Behind Iran lies a region that almost nobody in Indian media discusses. It is landlocked, it is resource-rich beyond imagination, and its only practical southern exit runs directly through Iranian territory.</p>
+
+    <div class="s-bar-wrap reveal">
+      <div class="s-bar-title">The resources behind the door Iran was guarding</div>
+      <div class="s-bar-row">
+        <div class="s-bar-top"><div class="s-bar-lbl">Kazakhstan: oil and uranium</div><div class="s-bar-val" style="color:var(--accent)">$2T+</div></div>
+        <div class="s-bar-track"><div class="s-bar-fill" style="width:80%;background:var(--accent)"></div></div>
+        <div class="s-bar-note">3% of the world's oil and 43% of the world's uranium. The only southern entry point not controlled by Russia or China ran through Iran.</div>
+      </div>
+      <div class="s-bar-row">
+        <div class="s-bar-top"><div class="s-bar-lbl">Turkmenistan: natural gas</div><div class="s-bar-val" style="color:var(--gold)">$1T+</div></div>
+        <div class="s-bar-track"><div class="s-bar-fill" style="width:55%;background:var(--gold)"></div></div>
+        <div class="s-bar-note">The 4th largest natural gas reserves on earth. Completely landlocked. The only southern corridor to world markets ran through Iran.</div>
+      </div>
+      <div class="s-bar-row">
+        <div class="s-bar-top"><div class="s-bar-lbl">Lithium and rare earths across the region</div><div class="s-bar-val" style="color:var(--blue)">$2T+</div></div>
+        <div class="s-bar-track"><div class="s-bar-fill" style="width:65%;background:var(--blue)"></div></div>
+        <div class="s-bar-note">The materials inside every electric vehicle and solar panel. Without them the clean energy transition stops. The southern corridor to access them ran through Iran.</div>
+      </div>
+    </div>
+
+    <div class="fact-box reveal">
+      <div class="fact-box-label">The democratic deficit nobody talks about</div>
+      <div class="fact-box-body">Only 25% of Americans support this war. The US Senate voted 53 to 47 to continue it without a full Congressional authorization debate. The public is against it. Their elected representatives were bypassed. Over a thousand people have died. <strong>So who made this decision? And can you name them?</strong></div>
+    </div>
+
+    <p class="reveal">Now watch for the following, because it happens every time without exception. Within 12 to 18 months of any ceasefire, major energy companies will file for access to Iranian oil assets. A reconstruction fund will be announced, managed by a Western financial institution. Iranian oil will return to dollar-denominated pricing. The people who were bombed will then pay, with interest, for the infrastructure used to bomb them. It happened in Iraq. In Libya. Watch for it in Iran.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 5 -->
+<section id="chapter5" class="bg-warm" data-section="5">
+  <div class="container">
+    <div class="chapter-label reveal">Chapter Five</div>
+    <div class="display reveal reveal-delay-1">You are not watching this. <em>You are inside it.</em></div>
+
+    <p class="reveal reveal-delay-2">If you have read this far and thought: this is about distant countries, terrible but not my problem, then this chapter is specifically for you. Every dynamic described in this piece is actively running inside India right now. On your savings. On your fuel price. On your government's foreign policy choices. On this country's future.</p>
+
+    <div class="card-grid reveal">
+      <div class="card-item">
+        <div class="card-item-icon">🏦</div>
+        <div class="card-item-title">Your family's savings are the target</div>
+        <div class="card-item-body">BlackRock, the world's largest asset manager, with $10 trillion under management, has partnered with Jio Financial Services to enter Indian households. Indians hold an estimated $3 to $4 trillion in gold, fixed deposits, and savings. The strategy is to route that wealth into global financial markets through a brand Indians already trust. The extraction does not require a warship. It requires a good app and a familiar name.</div>
+      </div>
+      <div class="card-item">
+        <div class="card-item-icon">🛣️</div>
+        <div class="card-item-title">India's best strategic move in decades just died</div>
+        <div class="card-item-body">India spent years building the Chabahar port in Iran to access Central Asia by bypassing Pakistan. It was India's one independent route to $5 trillion in untapped resources. It would have changed India's strategic position permanently. The Iran war ended that calculation in the first week of strikes. India's Central Asia strategy is now paused indefinitely.</div>
+      </div>
+      <div class="card-item">
+        <div class="card-item-icon">🔇</div>
+        <div class="card-item-title">The silence that told you everything</div>
+        <div class="card-item-body">A US submarine sank an Iranian warship in the Indian Ocean, India's own strategic backyard. India issued no statement. Not a whisper of protest. Because Israel is India's primary supplier of drones and precision missiles. The silence was not neutrality or diplomacy. It was the price of the arms contract, paid in the currency of looking the other way when people die in your neighbourhood.</div>
+      </div>
+      <div class="card-item">
+        <div class="card-item-icon">⛽</div>
+        <div class="card-item-title">A fortnight from an energy crisis</div>
+        <div class="card-item-body">India imports 85% of its oil. If the Strait of Hormuz closes for even two weeks, there is no ready alternative supply chain. Petrol prices spike within days. Trucking costs rise. Food prices follow. Inflation climbs. The rupee weakens. A conflict India had no vote in, fought for reasons India was not consulted about, can bring Indian cities to their knees within a fortnight.</div>
+      </div>
+    </div>
+
+    <div class="callout-block blue reveal">
+      <p>India's current leadership made a deliberate choice to build these dependencies: the arms relationship with Israel, the financial opening to BlackRock, the silence on American military activity in Indian waters. The people who will live with the consequences of those choices are not the ones who made them.</p>
+    </div>
+
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">"Adani's net worth grew from $7 billion in 2014 to $120 billion at its peak, tracking almost precisely with the political rise of the Modi government. The same logic of extraction that operates globally is running at home. Different flag. Identical mechanism."</div>
+      <div class="pull-quote-attr">Hindenburg Research report, January 2023</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 6: THEIR OWN WORDS -->
+<section id="chapter6" class="bg-dark" data-section="6">
+  <div class="container">
+    <div class="chapter-label reveal" style="color:var(--dark-faint)">Chapter Six</div>
+    <div class="display reveal reveal-delay-1">They described it <em>themselves</em></div>
+
+    <p class="reveal reveal-delay-2" style="color:var(--dark-text)">You should not have to take any of this on faith. So do not. Here is what the people who designed and ran this system said about it directly. In public. Under their own names. On record. These are not leaked to a conspiracy website. They are in government archives, television broadcasts, and official policy documents.</p>
+
+    <div class="divider reveal"></div>
+
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">"In the councils of government, we must guard against the acquisition of unwarranted influence, whether sought or unsought, by the military-industrial complex. The potential for the disastrous rise of misplaced power exists and will persist."</div>
+      <div class="pull-quote-attr">Dwight D. Eisenhower, farewell address as US President, January 17, 1961. Eisenhower had commanded Allied forces in World War II and spent eight years as president. This is what he chose to say on his last day in office. He was warning about what was being built inside his own country.</div>
+    </div>
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">"The intelligence and facts were being fixed around the policy."</div>
+      <div class="pull-quote-attr">The Downing Street Memo, a classified British Cabinet briefing dated July 23, 2002 — eight months before the Iraq invasion. The decision to invade had already been made. The intelligence about weapons of mass destruction was being manufactured to justify it retroactively. This document is real, uncontested, and freely available online. None of it was denied by the British government when it leaked.</div>
+    </div>
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">"Further, the process of transformation, even if it brings revolutionary change, is likely to be a long one, absent some catastrophic and catalyzing event, like a new Pearl Harbor."</div>
+      <div class="pull-quote-attr">Project for the New American Century, September 2000. A policy document calling explicitly for US military dominance and regime change across the Middle East. Signed by Dick Cheney, Donald Rumsfeld, and Paul Wolfowitz. Published exactly twelve months before September 11, 2001. All three men then ran the wars that followed. The document is freely available online.</div>
+    </div>
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">"We came, we saw, he died." [laughing]</div>
+      <div class="pull-quote-attr">Hillary Clinton, US Secretary of State, CBS News, October 20, 2011. She was reacting to news of Muammar Gaddafi's death. Six weeks before the NATO intervention, Gaddafi had formally proposed a gold-backed pan-African currency for oil trade. Clinton was in a television interview, discussing the killing of a head of state, and she was laughing.</div>
+    </div>
+
+    <div class="divider reveal"></div>
+    <p class="reveal" style="color:var(--dark-text)">These are the architects. Not anonymous sources. Not dissidents. The people who held the offices, signed the orders, and gave the briefings. <strong>The question worth sitting with is not whether this is real. It is why nobody ever placed these quotes in front of you in this order before now.</strong></p>
+  </div>
+</section>
+
+<!-- CHAPTER 7: KRISHNAMURTI + WHAT NOW -->
+<section id="chapter7" data-section="7">
+  <div class="container">
+    <div class="chapter-label reveal">Chapter Seven</div>
+    <div class="display reveal reveal-delay-1">The question <em>Krishnamurti kept asking</em></div>
+
+    <p class="reveal reveal-delay-2">Jiddu Krishnamurti was born in Madanapalle, Andhra Pradesh in 1895. He became one of the most important philosophers of the twentieth century. He spent his entire life asking one kind of question. Not about politics or economics. About the mind doing the observing.</p>
+
+    <p class="reveal">He believed that most human suffering, including war, was not caused by evil people in power. It was caused by ordinary people who had never learned to look at reality without the filter of what they had been told to believe. He thought the inability to see clearly was the root of almost everything.</p>
+
+    <div class="k-box reveal">
+      <div class="k-label">Three questions from Krishnamurti worth sitting with today</div>
+      <div class="k-question">"Why do you accept the world as it is? Why do you not revolt? Not violently — but deeply, inwardly, so that you begin to understand it?"</div>
+      <div class="k-question">"Can you look at the fact of what is happening in the world without any conclusion, without any ideology, without any system of thought guiding what you see?"</div>
+      <div class="k-question">"The moment you follow someone, you cease to follow truth."</div>
+      <div class="k-attr" style="margin-top:16px">Jiddu Krishnamurti, 1895 to 1986. Born in Madanapalle, Andhra Pradesh.</div>
+    </div>
+
+    <p class="reveal">The system described in this piece does not fear outrage. Outrage is easy to redirect. It does not fear protesters. Protesters can be managed. What it cannot survive is a critical mass of people who simply see it clearly and refuse to be confused about what they are watching.</p>
+
+    <p class="reveal">That is why the news cycle moves so fast. That is why there is always a new villain, a new emergency, a new thing to be angry about. Not by accident. By design. <strong>Confusion is the product. Your attention is the raw material.</strong></p>
+
+    <div class="divider reveal"></div>
+
+    <div class="n-list reveal">
+      <div class="n-item">
+        <div class="n-num">1</div>
+        <div>
+          <div class="n-title">Every time a war starts, ask one question</div>
+          <div class="n-body">Who profits from the outcome? Not from the stated reason. From what actually happens afterward. Who gets the reconstruction contracts? Whose share price rises in the first week of fighting? Which territories, ports, and resources become accessible when it ends? Follow that trail. The real reason shows up within months.</div>
+        </div>
+      </div>
+      <div class="n-item">
+        <div class="n-num">2</div>
+        <div>
+          <div class="n-title">Learn to separate three things media constantly blurs</div>
+          <div class="n-body"><strong>Documented fact:</strong> the CIA coup in Iran in 1953 is in official archives. <strong>Reasonable inference:</strong> Western capital will enter post-war Iran because that is what happened in every comparable case. <strong>Speculation:</strong> specific timelines and individuals. Most journalism and most propaganda blend these three. Once you learn to separate them, almost everything becomes easier to evaluate.</div>
+        </div>
+      </div>
+      <div class="n-item">
+        <div class="n-num">3</div>
+        <div>
+          <div class="n-title">Go to the primary sources yourself</div>
+          <div class="n-body">The Downing Street Memo is a Google search away. The CIA's official acknowledgment of the 1953 Iran coup is on the CIA's own website. The PNAC document is freely available. The most important evidence is not hidden behind paywalls or classified vaults. It is sitting in plain sight, waiting for someone to read it in the right order.</div>
+        </div>
+      </div>
+      <div class="n-item">
+        <div class="n-num">4</div>
+        <div>
+          <div class="n-title">Share clarity, not outrage</div>
+          <div class="n-body">Outrage spreads but does not teach. A clear explanation, passed from one person to another, is harder to dismiss and harder to redirect. This system has survived every angry protest movement in living memory. It has not yet survived being understood by enough people simultaneously. That gap is still open.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fact-box reveal">
+      <div class="fact-box-label">Four books that change how you read the news</div>
+      <div class="fact-box-body">
+        <strong>Confessions of an Economic Hit Man</strong> by John Perkins. Written by someone who ran the debt-trap system professionally for decades. He describes his own job in clinical detail.<br><br>
+        <strong>The Shock Doctrine</strong> by Naomi Klein. Documents how financial crises — real and manufactured — are used to force open economies at their most vulnerable moments.<br><br>
+        <strong>Debt: The First 5,000 Years</strong> by David Graeber. What money actually is, where it came from, and how debt became one of history's most reliable tools of control.<br><br>
+        <strong>The Grand Chessboard</strong> by Zbigniew Brzezinski. The actual US strategy document for Central Asian dominance. Written in 1997. Read it against a map of current events.
+      </div>
+    </div>
+
+    <div class="footnote reveal">
+      Every claim in this piece comes from documented sources: official government admissions, declassified documents, on-record statements, and verified journalism. Nothing here requires you to trust the author. Every single item can be verified independently. That is not an incidental quality of this piece. It is the point.
+    </div>
+  </div>
+</section>
+
+<!-- REACTIONS + DASHBOARD -->
+<div class="reactions-section" id="dashboard-section">
+  <div class="reactions-inner">
+
+    <div class="reactions-title reveal">Did this change how you see things?</div>
+    <div class="reactions-sub reveal reveal-delay-1">Your reaction tells me whether to keep building this.</div>
+
+    <div class="react-btns reveal reveal-delay-2" id="reactBtns">
+      <button class="react-btn" data-label="Mind blown" onclick="react(this)"><span class="emoji">🤯</span> Mind blown <span class="count">214</span></button>
+      <button class="react-btn" data-label="I knew it" onclick="react(this)"><span class="emoji">👊</span> I knew it <span class="count">98</span></button>
+      <button class="react-btn" data-label="Still skeptical" onclick="react(this)"><span class="emoji">🤔</span> Still skeptical <span class="count">47</span></button>
+      <button class="react-btn" data-label="Sharing this" onclick="react(this)"><span class="emoji">📤</span> Sharing this <span class="count">183</span></button>
+    </div>
+    <div class="react-thanks reveal" id="reactThanks">Thanks. That feedback genuinely helps.</div>
+
+    <div class="comment-area reveal reveal-delay-2">
+      <div class="comment-label">Leave a thought or a question</div>
+      <textarea class="comment-input" id="commentInput" rows="3" placeholder="What clicked for you? What do you want to understand better?"></textarea>
+      <button class="comment-submit" onclick="submitComment()">Send it</button>
+      <div class="thanks-msg" id="commentThanks">Got it. Your thought goes into what gets built next.</div>
+    </div>
+
+    <div class="dashboard-link-block reveal">
+      <div class="dlink-icon">📊</div>
+      <div>
+        <div class="dlink-title">Want to go much deeper? The complete map is live.</div>
+        <div class="dlink-body">This piece is an introduction. The full map goes much further: 500 years of financial history, every major conflict since 1945 decoded, India's complete dependency map, who actually runs the system across six tiers, the thinkers who saw this coming, the alternatives that actually work, and what to do with the knowledge.</div>
+        <a href="power-comprehensive.html" class="dlink-cta">Read the complete map &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" data-section="8" style="min-height:auto">
+  <div class="container">
+    <div class="cta-title reveal">Send this to one person<br>who does not know yet.</div>
+    <div class="cta-body reveal reveal-delay-1">Not to win an argument. Just so one more person has the framework. Understanding spreads person to person. It always has.</div>
+    <div class="cta-actions reveal reveal-delay-2">
+      <button class="btn-primary" id="shareBtn" onclick="shareThis()">Share this page</button>
+      <button class="btn-ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">Read again</button>
+    </div>
+    <div class="cta-footer reveal reveal-delay-3">
+      An ongoing project. Updated as events develop.<br>
+      Built to make the real world legible to everyone.
+    </div>
+  </div>
+</section>
+
+<script>
+window.addEventListener('scroll', () => {
+  const s = window.scrollY;
+  const t = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (s/t*100)+'%';
+  document.getElementById('navbar').classList.toggle('scrolled', s > 60);
+  const sections = document.querySelectorAll('section[data-section]');
+  const dots = document.querySelectorAll('.c-dot');
+  sections.forEach((sec,i) => {
+    const r = sec.getBoundingClientRect();
+    if (r.top <= window.innerHeight*0.5 && r.bottom >= window.innerHeight*0.5) {
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[i]) dots[i].classList.add('active');
+    }
+  });
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.1, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.s-bar-fill').forEach(f => {
+        const w = f.style.width; f.style.width='0';
+        setTimeout(() => f.style.width = w, 200);
+      });
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold:0.25 });
+document.querySelectorAll('.s-bar-wrap').forEach(el => barObs.observe(el));
+
+function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
+
+const FORM_ENDPOINT = 'https://formspree.io/f/mkoqnqqb';
+async function sendToFormspree(fields) {
+  const fd = new FormData();
+  for (const [k, v] of Object.entries(fields)) fd.append(k, v);
+  try {
+    const res = await fetch(FORM_ENDPOINT, { method:'POST', headers:{'Accept':'application/json'}, body:fd });
+    return res.ok;
+  } catch(e) { return false; }
+}
+
+let reacted = false;
+function react(btn) {
+  if (reacted) return;
+  reacted = true;
+  btn.classList.add('selected');
+  const label = btn.getAttribute('data-label');
+  const c = btn.querySelector('.count');
+  if (c) c.textContent = parseInt(c.textContent) + 1;
+  document.getElementById('reactThanks').style.display = 'block';
+  sendToFormspree({ _subject:'Reaction: '+label, type:'Reaction', reaction:label });
+}
+
+async function submitComment() {
+  const val = document.getElementById('commentInput').value.trim();
+  if (!val) return;
+  const btn = document.querySelector('.comment-area .comment-submit');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  await sendToFormspree({ _subject:'Comment from reader', type:'Comment', message:val });
+  document.getElementById('commentInput').value = '';
+  document.getElementById('commentThanks').style.display = 'block';
+  btn.textContent = 'Sent';
+}
+
+function shareThis() {
+  if (navigator.share) {
+    navigator.share({ title:'Why Wars Happen: The Real Reason', text:'A clear explanation of why wars happen, who profits, and what it means for India.', url:window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = document.getElementById('shareBtn');
+      btn.textContent = 'Link copied';
+      setTimeout(() => btn.textContent = 'Share this page', 2200);
+    }).catch(() => { window.prompt('Copy this link:', window.location.href); });
+  }
+}
+</script>
+</body>
+</html>
